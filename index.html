@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="IMKON AI — universities, scholarships, programs, competitions and courses in one platform.">
+<title>IMKON AI — Your Future. Your Opportunities. One Platform.</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%230b1f3a'/%3E%3Cpath d='M8 24V8h4v16zm6 0V8l10 16V8' stroke='%2310b981' stroke-width='3' fill='none'/%3E%3C/svg%3E">
+<style>
+:root{--n:#0b1f3a;--g:#10b981;--g2:#059669;--bg:#f6f8fa;--m:#64748b;--b:#e2e8f0}
+*{box-sizing:border-box}body{margin:0;font:15px/1.55 Inter,system-ui,sans-serif;color:#0f172a;background:var(--bg)}
+a{color:var(--g2)}header{background:#fff;border-bottom:1px solid var(--b);position:sticky;top:0;z-index:9}
+.top{display:flex;gap:12px;align-items:center;padding:10px 20px;max-width:1200px;margin:auto;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--n);text-decoration:none;font-size:20px}
+.logo i{width:30px;height:30px;border-radius:8px;background:var(--n);display:grid;place-items:center;color:var(--g);font-style:normal;font-size:16px}
+.logo b{color:var(--g)}.top input[type=search]{flex:1;min-width:160px}
+nav{display:flex;gap:2px;overflow-x:auto;padding:0 16px 8px;max-width:1200px;margin:auto;scrollbar-width:none}
+nav a{white-space:nowrap;padding:6px 11px;border-radius:99px;text-decoration:none;color:var(--n);font-size:13.5px;font-weight:500;transition:.2s}
+nav a:hover,nav a.on{background:var(--n);color:#fff}
+main{max-width:1200px;margin:auto;padding:24px 20px 60px}
+input,select,textarea,button{font:inherit;padding:9px 12px;border:1px solid var(--b);border-radius:10px;background:#fff}
+button,.btn{cursor:pointer;background:var(--g);color:#fff;border:0;font-weight:600;text-decoration:none;display:inline-block;padding:10px 18px;border-radius:10px;transition:.2s}
+button:hover,.btn:hover{background:var(--g2);transform:translateY(-1px)}
+.alt{background:#fff!important;color:var(--n)!important;border:1px solid var(--b)!important}.sm{padding:5px 10px;font-size:13px}
+.hero{background:linear-gradient(135deg,var(--n),#12385f 60%,var(--g2));color:#fff;border-radius:24px;padding:56px 32px;margin-bottom:28px}
+.hero h1{font-size:clamp(28px,5vw,46px);margin:0 0 12px;line-height:1.15}.hero p{max-width:620px;opacity:.9}
+.hero input{width:100%;max-width:560px;padding:14px 18px;border-radius:14px;margin:14px 0;display:block}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px}
+.card{background:#fff;border:1px solid var(--b);border-radius:16px;padding:18px;box-shadow:0 1px 3px #0b1f3a0d;transition:.2s}
+.card:hover{box-shadow:0 8px 24px #0b1f3a14;transform:translateY(-2px)}.card h3{margin:.2em 0;font-size:16px;color:var(--n)}
+.tag{display:inline-block;font-size:12px;padding:2px 9px;border-radius:99px;background:#ecfdf5;color:var(--g2);margin:0 4px 4px 0}
+.tag.w{background:#fef3c7;color:#92400e}.tag.o{background:#dcfce7;color:#166534}.tag.x{background:#fee2e2;color:#991b1b}
+h2{color:var(--n);margin:32px 0 14px}.row{display:flex;gap:10px;flex-wrap:wrap;margin:12px 0}.m{color:var(--m)}
+.banner{background:#fef3c7;color:#78350f;padding:8px 20px;font-size:13px;text-align:center}
+table{width:100%;border-collapse:collapse;background:#fff;border-radius:12px;overflow:hidden}td,th{padding:9px 12px;border-bottom:1px solid var(--b);text-align:left}
+.tl{border-left:3px solid var(--g);margin-left:10px;padding-left:20px}.tl div{position:relative;margin-bottom:18px}
+.tl div:before{content:"";position:absolute;left:-29px;top:4px;width:15px;height:15px;border-radius:50%;background:#fff;border:3px solid var(--g)}
+.chat{background:#fff;border:1px solid var(--b);border-radius:16px;padding:16px;min-height:200px}.chat p{margin:8px 0;padding:10px 14px;border-radius:12px;background:var(--bg)}.chat p.u{background:#ecfdf5;margin-left:20%}
+footer{background:var(--n);color:#cbd5e1;padding:28px 20px;text-align:center;font-size:13px}
+</style></head><body>
+<div class="banner" id="demo"></div>
+<header><div class="top">
+<a class="logo" href="#/"><i>I</i>IMKON <b>AI</b></a>
+<input type="search" id="q" aria-label="Search">
+<select id="lang" aria-label="Language"><option value="en">EN</option><option value="ru">RU</option><option value="uz">UZ</option><option value="kk">QQ</option></select>
+</div><nav id="nav"></nav></header>
+<main id="app"></main>
+<footer>© IMKON AI · Your Future. Your Opportunities. One Platform.<br>
+<span id="foot"></span></footer>
+<script>
+/* ===== CONFIG: connect real backend here (Supabase / AI proxy). Never put secret keys in this file. ===== */
+const CONFIG={SUPABASE_URL:'',SUPABASE_ANON_KEY:'',AI_ENDPOINT:'' /* e.g. https://your-project.functions.supabase.co/assistant */,TELEGRAM_WEBHOOK:'' /* server-side only */,REPORT_EMAIL:'ronchece@gmail.com'};
+const NAV=['home','uni','sch','prog','comp','intern','course','exam','app','career','news','ai','dash'];
+const T={
+en:{home:'Home',uni:'Universities',sch:'Scholarships & Grants',prog:'Educational Programs',comp:'Competitions',intern:'Internships',course:'Courses & Learning',exam:'Exams & Preparation',app:'Application Center',career:'Career Guidance',news:'Education News',ai:'AI Assistant',dash:'My Dashboard',
+h1:'Discover Your Educational Opportunities',sub:'Universities, scholarships, grants and international programs — everything you need to build your future in one place.',ph:'Search universities, scholarships, programs...',b1:'Explore Opportunities',b2:'Find Your Future',why:'Why IMKON AI?',
+demo:'DEMO MODE — sample catalog. Every record links to its official source; details marked "Needs Verification" must be checked there.',save:'Save',saved:'Saved',open:'Open official source',empty:'Nothing here yet. Admins can add verified records with a source URL.',login:'Sign in',reg:'Register',out:'Sign out',foot:'Telegram bot: server-side integration prepared (see CONFIG).',path:'My Future Path',report:'Report incorrect info',nv:'Needs Verification',ask:'Ask the assistant...',send:'Send'},
+ru:{home:'Главная',uni:'Университеты',sch:'Стипендии и гранты',prog:'Образовательные программы',comp:'Конкурсы',intern:'Стажировки',course:'Курсы и обучение',exam:'Экзамены и подготовка',app:'Центр поступления',career:'Карьерная навигация',news:'Новости образования',ai:'AI-ассистент',dash:'Мой кабинет',
+h1:'Найдите свои образовательные возможности',sub:'Университеты, стипендии, гранты и международные программы — всё для вашего будущего в одном месте.',ph:'Поиск университетов, стипендий, программ...',b1:'Изучить возможности',b2:'Найти своё будущее',why:'Почему IMKON AI?',
+demo:'ДЕМО-РЕЖИМ — пример каталога. Каждая запись ведёт на официальный источник; данные «Требует проверки» сверяйте там.',save:'Сохранить',saved:'Сохранено',open:'Официальный источник',empty:'Пока пусто. Админ может добавить проверенные записи с URL источника.',login:'Войти',reg:'Регистрация',out:'Выйти',foot:'Telegram-бот: серверная интеграция подготовлена (см. CONFIG).',path:'Мой путь в будущее',report:'Сообщить об ошибке',nv:'Требует проверки',ask:'Спросите ассистента...',send:'Отправить'},
+uz:{home:'Bosh sahifa',uni:'Universitetlar',sch:'Stipendiya va grantlar',prog:'Ta’lim dasturlari',comp:'Tanlovlar',intern:'Stajirovkalar',course:'Kurslar va o‘qish',exam:'Imtihonlar va tayyorgarlik',app:'Hujjat topshirish markazi',career:'Karyera yo‘riqnomasi',news:'Ta’lim yangiliklari',ai:'AI yordamchi',dash:'Mening kabinetim',
+h1:'Ta’lim imkoniyatlaringizni kashf eting',sub:'Universitetlar, stipendiyalar, grantlar va xalqaro dasturlar — kelajagingiz uchun hammasi bir joyda.',ph:'Universitet, stipendiya, dastur qidirish...',b1:'Imkoniyatlarni ko‘rish',b2:'Kelajagingizni toping',why:'Nega IMKON AI?',
+demo:'DEMO REJIM — namunaviy katalog. Har bir yozuv rasmiy manbaga olib boradi; «Tekshirish kerak» ma’lumotlarni o‘sha yerda tekshiring.',save:'Saqlash',saved:'Saqlandi',open:'Rasmiy manba',empty:'Hozircha bo‘sh. Admin manba havolasi bilan tekshirilgan yozuvlar qo‘sha oladi.',login:'Kirish',reg:'Ro‘yxatdan o‘tish',out:'Chiqish',foot:'Telegram bot: server tomonidagi integratsiya tayyor (CONFIG).',path:'Mening kelajak yo‘lim',report:'Xato haqida xabar berish',nv:'Tekshirish kerak',ask:'Yordamchidan so‘rang...',send:'Yuborish'},
+kk:{home:'Bas bet',uni:'Universitetler',sch:'Stipendiya hám grantlar',prog:'Bilimlendiriw bagdarlamaları',comp:'Tańlawlar',intern:'Stajirovkalar',course:'Kurslar hám oqıw',exam:'Imtixanlar hám tayarlıq',app:'Hújjet tapsırıw orayı',career:'Karyera jol kórsetiwi',news:'Bilimlendiriw jańalıqları',ai:'AI járdemshi',dash:'Mening kabinetim',
+h1:'Bilimlendiriw imkaniyatlarıńızdı ashıń',sub:'Universitetler, stipendiyalar, grantlar hám xalıq aralıq bagdarlamalar — bárshesi bir jerde.',ph:'Universitet, stipendiya, bagdarlama izlew...',b1:'Imkaniyatlardı kóriw',b2:'Keleshegińizdi tabıń',why:'Nege IMKON AI?',
+demo:'DEMO REJIM — úlgi katalog. Hár bir jazıw rásmiy deregke alıp baradı; «Tekseriw kerek» maǵlıwmatlardı sol jerde tekseriń.',save:'Saqlaw',saved:'Saqlandı',open:'Rásmiy derek',empty:'Házirshe bos.',login:'Kiriw',reg:'Dizimnen ótiw',out:'Shıǵıw',foot:'Telegram bot: server integraciyası tayın (CONFIG).',path:'Meniń keleshek jolım',report:'Qátelik haqqında xabar',nv:'Tekseriw kerek',ask:'Járdemshiden sorań...',send:'Jiberiw'}};
+let lang=localStorage.getItem('lang')||'en';
+const t=k=>(T[lang]&&T[lang][k])||T.en[k]||k;
+const $=s=>document.querySelector(s),G=(k,d)=>{try{return JSON.parse(localStorage.getItem(k))??d}catch(e){return d}},P=(k,v)=>localStorage.setItem(k,JSON.stringify(v));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+/* ===== Seed: only real organisations with official links. NO deadlines/requirements invented -> all "Needs Verification". ===== */
+const seed=[
+['nuu','uni','National University of Uzbekistan','Uzbekistan','Bachelor, Master, PhD','Multidisciplinary','https://nuu.uz/'],
+['wiut','uni','Westminster International University in Tashkent','Uzbekistan','Bachelor, Master','Business, IT','https://wiut.uz/'],
+['inha','uni','Inha University in Tashkent','Uzbekistan','Bachelor','IT, Engineering','https://inha.uz/'],
+['tuit','uni','Tashkent University of Information Technologies','Uzbekistan','Bachelor, Master','IT, Telecom','https://tuit.uz/'],
+['tum','uni','Technical University of Munich','Germany','Bachelor, Master, PhD','Engineering, IT','https://www.tum.de/'],
+['bme','uni','Budapest University of Technology and Economics','Hungary','Bachelor, Master, PhD','Engineering, IT','https://www.bme.hu/'],
+['chev','sch','Chevening Scholarships','United Kingdom','Master','Any','https://www.chevening.org/'],
+['daad','sch','DAAD Scholarships','Germany','Master, PhD','Any','https://www.daad.org/'],
+['tb','sch','Türkiye Burslari','Türkiye','Bachelor, Master, PhD','Any','https://www.turkiyeburslari.gov.tr/'],
+['sh','sch','Stipendium Hungaricum','Hungary','Bachelor, Master, PhD','Any','https://stipendiumhungaricum.hu/'],
+['ful','sch','Fulbright Foreign Student Program','USA','Master, PhD','Any','https://foreign.fulbrightonline.org/'],
+['cf','sch','Campus France (study in France)','France','Bachelor, Master, PhD','Any','https://www.campusfrance.org/'],
+['eras','prog','Erasmus+','EU','Exchange, Youth, Research','Any','https://erasmus-plus.ec.europa.eu/'],
+['erasuz','prog','Erasmus+ Uzbekistan','Uzbekistan','Exchange','Any','https://erasmusplus.uz/'],
+['ioi','comp','International Olympiad in Informatics (IOI)','International','School','Informatics','https://ioinformatics.org/'],
+['cs50','course','CS50 — Introduction to Computer Science (free)','Online','Self-paced','Programming','https://cs50.harvard.edu/x/'],
+['ielts','exam','IELTS','International','Language certificate','English','https://ielts.org/'],
+['toefl','exam','TOEFL','International','Language certificate','English','https://www.ets.org/toefl'],
+['sat','exam','SAT','USA','Entrance exam','Any','https://satsuite.collegeboard.org/'],
+['act','exam','ACT','USA','Entrance exam','Any','https://www.act.org/']
+].map(a=>({id:a[0],t:a[1],n:a[2],c:a[3],l:a[4],f:a[5],u:a[6],s:'nv',ver:'—',src:a[6]}));
+const items=()=>seed.concat(G('added',[]).filter(i=>i.s!=='pending'));
+const find=id=>items().find(i=>i.id===id);
+const user=()=>G('session',null);
+const saved=()=>G('saved',[]);
+const stTag=s=>`<span class="tag ${s==='open'?'o':s==='closed'?'x':'w'}">${{open:'Open',up:'Upcoming',closed:'Closed',nv:t('nv')}[s]||t('nv')}</span>`;
+function card(i){const sv=saved().includes(i.id);return`<div class="card"><span class="tag">${esc(T.en[i.t]||i.t)}</span>${stTag(i.s)}<h3><a href="#/item/${esc(i.id)}" style="text-decoration:none;color:inherit">${esc(i.n)}</a></h3><div class="m">${esc(i.c)} · ${esc(i.l)}</div><div class="row"><button class="sm ${sv?'alt':''}" onclick="tog('${esc(i.id)}')">${sv?t('saved'):t('save')}</button><a class="btn sm alt" href="${esc(i.u)}" target="_blank" rel="noopener">${t('open')}</a>${i.t==='uni'?`<label class="m"><input type="checkbox" ${cmp.includes(i.id)?'checked':''} onchange="cmpTog('${esc(i.id)}')"> Compare</label>`:''}</div></div>`}
+let cmp=[];function cmpTog(id){cmp=cmp.includes(id)?cmp.filter(x=>x!==id):cmp.concat(id).slice(-3);route()}
+function tog(id){if(!user()){location.hash='#/dash';return}let s=saved();s=s.includes(id)?s.filter(x=>x!==id):s.concat(id);P('saved',s);route()}
+const grid=a=>a.length?`<div class="grid">${a.map(card).join('')}</div>`:`<p class="m">${t('empty')}</p>`;
+/* ===== Views ===== */
+const V={
+home(){const u=items();return`<section class="hero"><h1>${t('h1')}</h1><p>${t('sub')}</p><input id="hq" type="search" placeholder="${t('ph')}" onkeydown="if(event.key==='Enter')location.hash='#/search/'+encodeURIComponent(this.value)"><a class="btn" href="#/sch">${t('b1')}</a> <a class="btn alt" href="#/path">${t('b2')}</a></section>
+<h2>${t('uni')}</h2>${grid(u.filter(i=>i.t==='uni').slice(0,3))}<h2>${t('sch')}</h2>${grid(u.filter(i=>i.t==='sch').slice(0,3))}<h2>${t('prog')}</h2>${grid(u.filter(i=>i.t==='prog'))}
+<h2>${t('why')}</h2><div class="grid"><div class="card"><h3>Official sources only</h3>Every record keeps its source URL, status and last-verified date.</div><div class="card"><h3>My Future Path</h3>Roadmap, checklist and deadline tracker in one dashboard.</div><div class="card"><h3>4 languages</h3>Uzbek, Russian, English, Karakalpak.</div><div class="card"><h3>Honest AI</h3>The assistant answers only from the catalog and says when something needs verification.</div></div>`},
+catalog(type){const u=items().filter(i=>i.t===type);const cs=[...new Set(u.map(i=>i.c))];const q=($('#f_q')||{}).value||'',c=($('#f_c')||{}).value||'';
+const list=u.filter(i=>(!q||(i.n+i.f+i.l).toLowerCase().includes(q.toLowerCase()))&&(!c||i.c===c));
+let h=`<h2>${t(type)}</h2><div class="row"><input id="f_q" value="${esc(q)}" placeholder="${t('ph')}" oninput="route(1)"><select id="f_c" onchange="route(1)"><option value="">Country: all</option>${cs.map(x=>`<option ${x===c?'selected':''}>${esc(x)}</option>`).join('')}</select></div>`;
+if(type==='uni'&&cmp.length>1){const r=cmp.map(find);h+=`<div style="overflow:auto"><table><tr><th></th>${r.map(x=>`<th>${esc(x.n)}</th>`).join('')}</tr>${[['Country','c'],['Levels','l'],['Fields','f']].map(p=>`<tr><td>${p[0]}</td>${r.map(x=>`<td>${esc(x[p[1]])}</td>`).join('')}</tr>`).join('')}<tr><td>Tuition / Admission</td>${r.map(()=>`<td>${t('nv')}</td>`).join('')}</tr></table></div><br>`}
+return h+grid(list)},
+item(id){const i=find(id);if(!i)return'<p>404</p>';const rows=[['Country',i.c],['Level',i.l],['Field',i.f],['Funding organization / provider',t('nv')],['Eligibility & minimum requirements',t('nv')],['Language requirements',t('nv')],['Required documents',t('nv')],['Opening date',t('nv')],['Deadline',t('nv')+' (unconfirmed)'],['Application procedure',`<a href="${esc(i.u)}" target="_blank" rel="noopener">${esc(i.u)}</a>`],['Original source',esc(i.src)],['Last verified',esc(i.ver)]];
+return`<h2>${esc(i.n)}</h2>${stTag(i.s)}<table style="margin:14px 0">${rows.map(r=>`<tr><td><b>${r[0]}</b></td><td>${r[0]==='Country'||r[0]==='Level'||r[0]==='Field'?esc(r[1]):r[1]}</td></tr>`).join('')}</table><div class="row"><button onclick="tog('${esc(i.id)}')">${t('save')}</button><a class="btn alt" href="${esc(i.u)}" target="_blank" rel="noopener">${t('open')}</a><a class="btn alt" href="mailto:${CONFIG.REPORT_EMAIL}?subject=${encodeURIComponent('Report: '+i.n)}">${t('report')}</a></div>`},
+search(q){q=decodeURIComponent(q||'').toLowerCase();return`<h2>“${esc(q)}”</h2>`+grid(items().filter(i=>(i.n+i.c+i.f+i.l).toLowerCase().includes(q)))},
+intern(){return`<h2>${t('intern')}</h2>${grid(items().filter(i=>i.t==='intern'))}<p class="m">Age, eligibility and participation requirements are shown on each record once an admin adds it with a source.</p>`},
+news(){return`<h2>${t('news')}</h2>${grid(items().filter(i=>i.t==='news'))}<p class="m">Each article requires publication date and source.</p>`},
+app(){const g=[['University application process','Shortlist → check requirements on the official site → prepare documents → apply → track status.'],['Motivation letter / Personal statement','Why this program, your relevant experience, your goals. Be specific, 1 page.'],['CV / Resume','Education, achievements, projects, skills, languages. 1–2 pages.'],['Recommendation letters','Ask teachers 4–6 weeks early; give them your achievements list.'],['Interview','Prepare to explain your motivation, projects and plans.']];
+return`<h2>${t('app')}</h2><div class="grid">${g.map(x=>`<div class="card"><h3>${x[0]}</h3>${x[1]}</div>`).join('')}</div><h2>Template</h2><textarea id="tpl" rows="9" style="width:100%">Dear Admissions Committee,\n\nMy name is ___ and I am applying to ___ because ___.\nMy relevant experience: ___.\nMy goals: ___.\n\nSincerely,\n___</textarea><div class="row"><button onclick="navigator.clipboard.writeText($('#tpl').value)">Copy</button></div>`},
+career(){const c=[['Software / AI','CS, Data Science, Software Engineering','Programming, math, English','CS50, algorithms'],['Business','Economics, Management','Analytics, communication','Business English'],['Engineering','Mechanical, Electrical, Civil','Math, physics, CAD','Physics, calculus']];
+return`<h2>${t('career')}</h2><p class="m">Informational guidance only — not a definitive career assessment.</p><div class="grid">${c.map(x=>`<div class="card"><h3>${x[0]}</h3><b>Majors:</b> ${x[1]}<br><b>Skills:</b> ${x[2]}<br><b>Start with:</b> ${x[3]}</div>`).join('')}</div>`},
+exam(){return`<h2>${t('exam')}</h2><p class="m">Official registration links only; no copyrighted study materials are reproduced.</p>`+grid(items().filter(i=>i.t==='exam'))},
+ai(){return`<h2>${t('ai')}</h2><div class="chat" id="chat"><p>Hi! Ask about universities, scholarships, programs or a checklist. I answer only from the catalog and cite sources.</p></div><div class="row"><input id="aq" style="flex:1" placeholder="${t('ask')}" onkeydown="if(event.key==='Enter')askAI()"><button onclick="askAI()">${t('send')}</button></div>`},
+path(){const p=G('path',null);const f=['Any','Informatics','IT','Engineering','Business'],cn=['Any',...new Set(seed.map(i=>i.c))],lv=['Any','Bachelor','Master','PhD'];
+const sel=(id,a,v)=>`<select id="${id}">${a.map(x=>`<option ${x===v?'selected':''}>${x}</option>`).join('')}</select>`;
+let h=`<h2>${t('path')}</h2><div class="row">${sel('p_f',f,p&&p.f)}${sel('p_c',cn,p&&p.c)}${sel('p_l',lv,p&&p.l)}<button onclick="mkPath()">Build</button></div>`;
+if(p){const m=items().filter(i=>['uni','sch','prog'].includes(i.t)&&(p.c==='Any'||i.c===p.c||i.c==='EU')&&(p.l==='Any'||i.l.includes(p.l)||i.t==='prog')&&(p.f==='Any'||i.f.includes(p.f)||i.f==='Any'||i.f==='Multidisciplinary'));
+const st=[['1. Define goal',`${p.f} · ${p.c} · ${p.l}`],['2. Shortlist',m.slice(0,5).map(i=>`<a href="#/item/${i.id}">${esc(i.n)}</a>`).join(', ')||t('empty')],['3. Exams & language','IELTS / TOEFL / SAT — check each target\'s official requirement'],['4. Documents','CV, motivation letter, recommendations, transcripts'],['5. Apply','Use the official application link; confirm deadlines on the source'],['6. Track','Add confirmed deadlines in your dashboard']];
+h+=`<div class="tl">${st.map((s,k)=>`<div><label><input type="checkbox" ${(p.done||[]).includes(k)?'checked':''} onchange="pDone(${k})"> <b>${s[0]}</b></label><br><span class="m">${s[1]}</span></div>`).join('')}</div>`}
+return h},
+dash(){const u=user();if(!u)return`<h2>${t('dash')}</h2><div class="grid"><div class="card"><h3>${t('login')}</h3><div class="row"><input id="l_e" placeholder="Email" type="email"><input id="l_p" placeholder="Password" type="password"><button onclick="login()">${t('login')}</button></div></div><div class="card"><h3>${t('reg')}</h3><div class="row"><input id="r_n" placeholder="Name"><input id="r_e" placeholder="Email" type="email"><input id="r_p" placeholder="Password (8+)" type="password"><button onclick="register()">${t('reg')}</button></div></div></div><p class="m">Demo auth stored in this browser only. Replace with Supabase Auth in production.</p>`;
+const dl=G('dl_'+u.email,[]).sort((a,b)=>a.d>b.d?1:-1),sv=saved().map(find).filter(Boolean);
+return`<h2>${esc(u.name)} <button class="sm alt" onclick="logout()">${t('out')}</button> ${u.role==='admin'?'<a class="btn sm" href="#/admin">Admin</a>':''}</h2><h3>Saved</h3>${grid(sv)}<h3>Deadline tracker</h3><div class="row"><input id="d_t" placeholder="Title"><input id="d_d" type="date"><select id="d_k"><option value="c">Confirmed (official)</option><option value="e">Estimated / unverified</option></select><button onclick="addDl()">Add</button></div><table>${dl.map((d,k)=>`<tr><td>${esc(d.d)}</td><td>${esc(d.t)}</td><td><span class="tag ${d.k==='c'?'o':'w'}">${d.k==='c'?'Confirmed':'Estimated'}</span></td><td><button class="sm alt" onclick="delDl(${k})">×</button></td></tr>`).join('')||'<tr><td class="m">—</td></tr>'}</table>
+<h3>Suggest an opportunity (moderated)</h3><div class="row"><input id="s_n" placeholder="Title"><input id="s_u" placeholder="Official URL https://"><select id="s_t"><option value="sch">Scholarship</option><option value="uni">University</option><option value="prog">Program</option><option value="comp">Competition</option><option value="intern">Internship</option><option value="course">Course</option></select><button onclick="suggest()">Submit</button></div><p><a href="#/path">${t('path')}</a></p>`},
+admin(){const u=user();if(!u||u.role!=='admin')return'<p>403</p>';const a=G('added',[]);const us=G('users',[]);
+return`<h2>Admin</h2><p class="m">Users: ${us.length} · Added records: ${a.length} · Pending: ${a.filter(i=>i.s==='pending').length} · Saved items: ${saved().length}</p><div class="row"><input id="a_n" placeholder="Name"><input id="a_c" placeholder="Country"><input id="a_u" placeholder="Source URL https://"><select id="a_t"><option value="uni">uni</option><option value="sch">sch</option><option value="prog">prog</option><option value="comp">comp</option><option value="intern">intern</option><option value="course">course</option><option value="news">news</option></select><button onclick="adminAdd()">Add</button></div>
+<table>${a.map((i,k)=>`<tr><td>${esc(i.n)}</td><td>${i.t}</td><td><select onchange="setSt(${k},this.value)">${['pending','nv','open','up','closed'].map(s=>`<option ${i.s===s?'selected':''}>${s}</option>`).join('')}</select></td><td><button class="sm alt" onclick="setSt(${k},'ver')">Mark verified</button> <button class="sm alt" onclick="delAdd(${k})">×</button></td></tr>`).join('')}</table>`}};
+/* ===== Actions ===== */
+async function hash(s){const b=await crypto.subtle.digest('SHA-256',new TextEncoder().encode('imkon:'+s));return[...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function register(){const n=$('#r_n').value.trim(),e=$('#r_e').value.trim().toLowerCase(),p=$('#r_p').value;if(!n||!/^\S+@\S+\.\S+$/.test(e)||p.length<8)return alert('Check name, email, password (8+).');const us=G('users',[]);if(us.find(x=>x.email===e))return alert('Exists');const u={name:n,email:e,h:await hash(p),role:us.length?'user':'admin'};us.push(u);P('users',us);P('session',{name:n,email:e,role:u.role});route()}
+async function login(){const e=$('#l_e').value.trim().toLowerCase(),h=await hash($('#l_p').value),u=G('users',[]).find(x=>x.email===e&&x.h===h);if(!u)return alert('Wrong email or password');P('session',{name:u.name,email:u.email,role:u.role});route()}
+function logout(){localStorage.removeItem('session');route()}
+function addDl(){const u=user(),k='dl_'+u.email,a=G(k,[]);if(!$('#d_t').value||!$('#d_d').value)return;a.push({t:$('#d_t').value,d:$('#d_d').value,k:$('#d_k').value});P(k,a);route()}
+function delDl(i){const k='dl_'+user().email,a=G(k,[]);a.splice(i,1);P(k,a);route()}
+function addRec(n,u,t,c,s){if(!n||!/^https?:\/\//.test(u))return alert('Name and official URL (https://) are required.');const a=G('added',[]);a.push({id:'x'+Date.now(),t,n,c:c||'—',l:'—',f:'—',u,src:u,s,ver:s==='pending'?'—':new Date().toISOString().slice(0,10)});P('added',a);route()}
+function suggest(){addRec($('#s_n').value,$('#s_u').value,$('#s_t').value,'','pending');alert('Sent for moderation.')}
+function adminAdd(){addRec($('#a_n').value,$('#a_u').value,$('#a_t').value,$('#a_c').value,'nv')}
+function setSt(i,v){const a=G('added',[]);if(v==='ver'){a[i].ver=new Date().toISOString().slice(0,10);if(a[i].s==='pending')a[i].s='nv'}else a[i].s=v;P('added',a);route()}
+function delAdd(i){const a=G('added',[]);a.splice(i,1);P('added',a);route()}
+function mkPath(){P('path',{f:$('#p_f').value,c:$('#p_c').value,l:$('#p_l').value,done:[]});route()}
+function pDone(k){const p=G('path');p.done=p.done.includes(k)?p.done.filter(x=>x!==k):p.done.concat(k);P('path',p)}
+async function askAI(){const q=$('#aq').value.trim();if(!q)return;const c=$('#chat');c.innerHTML+=`<p class="u">${esc(q)}</p>`;$('#aq').value='';let a;
+if(CONFIG.AI_ENDPOINT){try{const r=await fetch(CONFIG.AI_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q,lang})});a=esc((await r.json()).answer)}catch(e){}}
+if(!a){const w=q.toLowerCase().split(/\W+/).filter(x=>x.length>2);const r=items().map(i=>({i,s:w.filter(x=>(i.n+i.c+i.f+i.l+i.t).toLowerCase().includes(x)).length})).filter(x=>x.s).sort((x,y)=>y.s-x.s).slice(0,3);
+a=/checklist|документ|hujjat/i.test(q)?'Checklist: 1) target list, 2) official requirements, 3) language/entrance exam, 4) CV + motivation letter, 5) recommendations, 6) confirm deadline on the official site, 7) apply.':
+r.length?r.map(x=>`<a href="#/item/${x.i.id}">${esc(x.i.n)}</a> (${esc(x.i.c)}) — deadline & requirements: <b>${t('nv')}</b>. Source: <a href="${esc(x.i.u)}" target="_blank" rel="noopener">${esc(x.i.u)}</a>`).join('<br>'):'I have no verified record for that — it needs verification. Try the official sources in the catalog.'}
+c.innerHTML+=`<p>${a}</p>`}
+/* ===== Router ===== */
+function route(keep){const h=location.hash.replace(/^#\/?/,'').split('/'),p=h[0]||'home',arg=h.slice(1).join('/');const fq=keep&&$('#f_q'),pos=fq?fq.selectionStart:0;
+const m={home:'home',uni:'uni',sch:'sch',prog:'prog',comp:'comp',course:'course'};let html;
+if(m[p]&&p!=='home')html=V.catalog(p);else if(V[p])html=V[p](arg);else html=V.home();
+$('#app').innerHTML=html;if(fq){const e=$('#f_q');e.focus();e.setSelectionRange(pos,pos)}
+$('#nav').innerHTML=NAV.map(k=>`<a href="#/${k==='home'?'':k}" class="${p===k||(k==='home'&&p==='home')?'on':''}">${t(k)}</a>`).join('');
+$('#q').placeholder=t('ph');$('#demo').textContent=t('demo');$('#foot').textContent=t('foot');document.documentElement.lang=lang==='kk'?'kk':lang;
+if(!keep)scrollTo(0,0)}
+$('#lang').value=lang;$('#lang').onchange=e=>{lang=e.target.value;localStorage.setItem('lang',lang);route()};
+$('#q').onkeydown=e=>{if(e.key==='Enter')location.hash='#/search/'+encodeURIComponent(e.target.value)};
+addEventListener('hashchange',()=>route());route();
+</script></body></html>
